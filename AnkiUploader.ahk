@@ -13,8 +13,8 @@ global VIM_COPY_DELAY := 100
 global NORMAL_DELAY := 150
 global AnkiAddWindow := "Add ahk_exe anki.exe"
 
-F12::LoadToAnki(false)
+F12::LoadToAnki(false) ; False means has no copied, so it will copy the text first before load to anki
 #F12::Repeater()
-F10::LoadToAnki(true)
+F10::LoadToAnki(true) ; True means has copied, so it will just load to anki directly
 #F10::UserManual()
 
