@@ -15,9 +15,13 @@ LoadToAnki(copied){
     {
         TaskIsRunning := true
         if(!copied)
+        {
             VimDoubleCopy()
+            Sleep, (8 * VIM_COPY_DELAY)
+        }
         WinActivate, %AnkiAddWindow%
         DoublePaste()
+        Sleep, (5 * NORMAL_DELAY)
         AddCard()
         WinActivate, %current_window%
         TaskIsRunning := false
@@ -41,16 +45,13 @@ Repeater(){
 ; ---------------- #F10 ----------------
 UserManual(){
     instructions := ""
-    instructions .= "This program can be used in two ways:`n"
-    instructions .= "1. Loading copied information using F10:`n"
-    instructions .= "- Open the Anki 'Add Card' tab and leave`it open`n"
-    instructions .= "- Take a screenshot of the answer (back of flashcard) first, then the question (front of flashcard)`n"
-    instructions .= "- Press F10 and the screenshots will be loaded into a flashcard in Anki, ready for the next one`n"
-    instructions .= "2. Loading information from apps that support macros, such as Obsedian, using Vim:`n"
-    instructions .= "- Open the Anki 'Add Card' tab and leave it open`n"
-    instructions .= "- Set up macros for copying the front (question) of the flashcard to 'q' and the back (answer) of the flashcard to 'w'`n"
-    instructions .= "- Press F12 to load 'q' and 'w' into a flashcard in Anki`n"
-    instructions .= "- Bonus: You can load multiple lines at once by pressing Window + F12. Make sure to move to the next line in 'q' before copying to ensure the loop works properly.`n"
+    instructions .= "Open the Anki 'Add Card' tab and leave it open`n`n"
+    instructions .= "1. Loading copied F10:`n"
+    instructions .= "First : Take a screenshot of the answer (back of flashcard)`nSecond : Take SecreenShot of the question (front of flashcard)`n`n"
+    instructions .= "2. Loading information with Vim:`n"
+    instructions .= "First : Set up macros `n Q --> front (Question)`n W --> back (Answer)`n`n"
+    instructions .= "When you press F12:`nIn ViM Will Send @W then @Q`nIn Anki Will Send Ctrl+V (Q), Then tab #V + Down (W)`n`n"
+    instructions .= "Bonus: You can load multiple lines at once by pressing Window + F12.`nMake sure to move to the next line in 'q' after copying to ensure the loop works properly.`n"
     ; make a message box that shows the instructions, and instead of the ok button show "Let's go" button
     MsgBox, %instructions%
 
