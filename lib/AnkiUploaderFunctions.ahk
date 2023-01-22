@@ -17,7 +17,6 @@ LoadToAnki(copied){
         if(!copied)
         {
             VimDoubleCopy()
-            ; Sleep, (VIM_COPY_DELAY)
         }
         WinActivate, %AnkiAddWindow%
         DoublePaste()
@@ -66,39 +65,34 @@ TaskCheckerReload(){
 }
 
 ; ---------------- VIM Section ----------------
-VimDoubleCopy(){
-    VimMacroGo("w") ; Second Field
-    VimMacroGo("q") ; First Field
-}
-
-VimMacroGo(key){
-    SendWithDelay("@", VIM_COPY_DELAY)
-    SendWithDelay(key, 2 * VIM_COPY_DELAY)
-    ; SendWithDelay("2{Shift Up}", VIM_COPY_DELAY)
-    ; SendWithDelay("{Shift Up}", 0)
-    return
-}
-
 SendWithDelay(key, delay){
     SendInput, %key%
     Sleep, %delay%
     return
 }
 
+VimMacroGo(key){
+    SendWithDelay("@", VIM_COPY_DELAY)
+    SendWithDelay(key, (2 * VIM_COPY_DELAY))
+    return
+}
+
+VimDoubleCopy(){
+    VimMacroGo("w") ; Second Field
+    VimMacroGo("q") ; First Field
+}
 ; ---------------- Anki Sending ----------------
 DoublePaste(){
     SendWithDelay("^v", NORMAL_DELAY)
     SendWithDelay("{Tab}", NORMAL_DELAY)
     SendWithDelay("#v", NORMAL_DELAY)
     SendWithDelay("{Down}", NORMAL_DELAY)
-    SendWithDelay("{Enter}", 2 * NORMAL_DELAY)
+    SendWithDelay("{Enter}", (2 * NORMAL_DELAY))
 }
 
 ; ---------------- Anki Add Card ----------------
 AddCard(){
     SendWithDelay("^{Enter}", NORMAL_DELAY)
-    ; SendWithDelay("{Enter}", NORMAL_DELAY)
-    ; SendWithDelay("{Ctrl Up}", 2 * NORMAL_DELAY)
 }
 
 ; ---------------- Trash Section ----------------
