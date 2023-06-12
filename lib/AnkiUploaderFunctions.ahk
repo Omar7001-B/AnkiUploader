@@ -7,6 +7,23 @@ SendInput, {+ Up}
 SendInput, {^ Up}
 SendInput, {! Up}
 SendInput, {# Up}
+;----- Just for Anki ------
+JustForAnki(){
+    WinGetActiveTitle, current_window
+    VimMacroGo("q") ; First Field
+    WinActivate, %AnkiAddWindow%
+    SendWithDelay("^v", NORMAL_DELAY)
+    SendWithDelay("{Tab}", NORMAL_DELAY)
+
+    WinActivate, %current_window%
+    VimMacroGo("w") ; First Field
+
+    WinActivate, %AnkiAddWindow%
+    SendWithDelay("^v", NORMAL_DELAY)
+    SendWithDelay("^{Enter}", (2 * NORMAL_DELAY))
+    WinActivate, %current_window%
+
+}
 ; ---------------- Basic Loader ----------------
 LoadToAnki(copied){
     TaskCheckerReload()
@@ -87,13 +104,32 @@ DoublePaste(){
     SendWithDelay("{Tab}", NORMAL_DELAY)
     SendWithDelay("#v", NORMAL_DELAY)
     SendWithDelay("{Down}", NORMAL_DELAY)
-    SendWithDelay("{Enter}", (2 * NORMAL_DELAY))
+    SendWithDelay("^{Enter}", NORMAL_DELAY)
 }
 
 ; ---------------- Anki Add Card ----------------
 AddCard(){
     SendWithDelay("^{Enter}", NORMAL_DELAY)
 }
+
+; ---------------- Load With Tab ----------------
+LoadWithTab(){
+    WinGetActiveTitle, current_window
+    WinActivate, %AnkiAddWindow%
+    SendWithDelay("^v", NORMAL_DELAY)
+    SendWithDelay("{Tab}", NORMAL_DELAY)
+    WinActivate, %current_window%
+}
+
+; ---------------- Load With Enter ----------------
+LoadWithEnter(){
+    WinGetActiveTitle, current_window
+    WinActivate, %AnkiAddWindow%
+    SendWithDelay("^v", NORMAL_DELAY)
+    SendWithDelay("^{Enter}", NORMAL_DELAY)
+    WinActivate, %current_window%
+}
+
 
 ; ---------------- Trash Section ----------------
 ; CapsLock::

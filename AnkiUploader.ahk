@@ -17,5 +17,10 @@ F12::LoadToAnki(false) ; False means has no copied, so it will copy the text fir
 #F12::Repeater()
 F10::LoadToAnki(true) ; True means has copied, so it will just load to anki directly
 #F10::UserManual()
-F9::VimDoubleCopy()
+F4::JustForAnki()
+XButton2::LoadWithTab() 
+XButton1::LoadWithEnter()
+Insert::LoadWithTab() 
+Home::LoadWithEnter()
+;F9::VimDoubleCopy()
 
